@@ -14,7 +14,7 @@ async function main(){
         await client.connect();
         console.log('connection successfully')
         // Make the appropriate DB calls
-        // await  listDatabases(client);
+         await  listDatabases(client);
 
     } catch (e) {
         console.error(e);
@@ -24,3 +24,9 @@ async function main(){
 }
 
 main().catch(console.error);
+async function listDatabases(client){
+    databasesList = await client.db().admin().listDatabases();
+
+    console.log("Databases:");
+    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+};
